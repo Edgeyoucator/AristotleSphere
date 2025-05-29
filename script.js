@@ -73,19 +73,22 @@ function validateAnswer(zones, expected, partNumber) {
     part1Complete = true;
     document.getElementById('toPart2').disabled = false;
     document.getElementById('toPart2').classList.remove('disabled');
+    showSplashScreen(true, partNumber);
+  } else {
+    showSplashScreen(true, partNumber);
   }
-  showSplashScreen(true);
 }
 
 // Display feedback splash
-function showSplashScreen(success) {
+function showSplashScreen(success, partNumber = 1) {
   const splash = document.createElement('div');
   splash.id = 'splash-screen';
   splash.innerHTML = success
     ? `
       <div class="splash-content">
         <h2>🎉 Correct!</h2>
-        <p>Proceed to PART 2 by clicking next</p>
+        <p>${partNumber === 2 ? "Your partner's password is: <strong>universe</strong>" : "Success! Proceed to part 2 by clicking Next →"}</p>
+        <p><em>Click anywhere to continue.</em></p>
       </div>
     `
     : `
