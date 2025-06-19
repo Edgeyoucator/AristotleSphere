@@ -45,12 +45,14 @@ function touchStartHandler(e) {
   dragClone.style.zIndex = '1000';
   document.body.appendChild(dragClone);
   draggedItem.classList.add('dragging');
+  draggedItem.style.display = 'none';
   const touch = e.touches[0];
   touchOffsetX = touch.clientX - rect.left;
   touchOffsetY = touch.clientY - rect.top;
 }
 
 function touchMoveHandler(e) {
+  e.preventDefault();
   if (!dragClone) return;
   const touch = e.touches[0];
   dragClone.style.left = `${touch.clientX - touchOffsetX}px`;
@@ -58,6 +60,7 @@ function touchMoveHandler(e) {
 }
 
 function touchEndHandler(e) {
+  e.preventDefault();
   if (!draggedItem) return;
   const touch = e.changedTouches[0];
   let placed = false;
@@ -82,6 +85,7 @@ function touchEndHandler(e) {
   }
 
   draggedItem.classList.remove('dragging');
+  draggedItem.style.display = 'block';
   if (dragClone) dragClone.remove();
   dragClone = null;
   draggedItem = null;
