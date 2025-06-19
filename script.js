@@ -4,6 +4,19 @@ let dragClone = null;
 let touchOffsetX = 0;
 let touchOffsetY = 0;
 
+// Auto-scroll when dragging near screen edges on touch devices
+function autoScroll(y) {
+  const threshold = 60; // distance from edge to start scrolling
+  const speed = 20; // pixels per frame
+  const vh = window.innerHeight;
+
+  if (y > vh - threshold) {
+    window.scrollBy(0, speed);
+  } else if (y < threshold) {
+    window.scrollBy(0, -speed);
+  }
+}
+
 
 // Enable drag-and-drop for all draggable items
 
@@ -60,6 +73,7 @@ function touchMoveHandler(e) {
   const touch = e.touches[0];
   dragClone.style.left = `${touch.clientX - touchOffsetX}px`;
   dragClone.style.top = `${touch.clientY - touchOffsetY}px`;
+  autoScroll(touch.clientY);
 }
 
 function touchEndHandler(e) {
@@ -140,3 +154,5 @@ document.querySelector('.drag-bank').addEventListener('drop', () => {
   }
 
 });
+
+
