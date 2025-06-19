@@ -57,10 +57,15 @@ p {
 .draggable {
   width: 60px;
   height: 60px;
-  
+
   object-fit: contain;
   cursor: grab;
   z-index: 20;
+  touch-action: none;
+}
+
+.draggable.dragging {
+  opacity: 0.5;
 }
 
 /* BACKGROUND CONTAINERS */
