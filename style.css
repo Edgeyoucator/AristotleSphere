@@ -68,6 +68,10 @@ p {
   opacity: 0.5;
 }
 
+.draggable.dragging {
+  opacity: 0.5;
+}
+
 /* BACKGROUND CONTAINERS */
 .background {
   position: relative;
